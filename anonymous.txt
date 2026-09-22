@@ -1,0 +1,169 @@
+--arithmatic Operations--
+--1.Addition--
+set serveroutput on;
+
+declare
+a number := 10;
+b number := 20;
+result number;
+begin
+result := a + b;
+dbms_output.put_line ('This is addition of a and b:' || result);
+end;
+/
+
+--2.Subtraction--
+declare
+a number := 1000;
+b number := 200;
+result number;
+begin
+result := a - b;
+dbms_output.put_line ('This is Subtraction of a and b:' || result);
+end;
+/
+
+--3. Multiplication--
+
+declare
+a number := 10;
+b number := 20;
+result number;
+begin
+result := a * b;
+dbms_output.put_line ('This is Multiplication of a and b:' || result);
+end;
+/
+
+--4.Division--
+declare
+a number := &a;
+b number := &b;
+result number;
+begin
+result := a / b;
+dbms_output.put_line ('This is Division of a and b:' || result);
+end;
+/
+
+
+--All Arithmatic operations in single Query--
+--Value initialise mehod--
+
+DECLARE
+    a NUMBER := 10;
+    b NUMBER := 20;
+    
+    addition NUMBER;
+    subtraction NUMBER;
+    multiplication NUMBER;
+    division NUMBER;
+BEGIN
+    addition := a + b;
+    subtraction := a - b;
+    multiplication := a * b;
+    division := a / b;
+
+    DBMS_OUTPUT.PUT_LINE('Addition: ' || addition);
+    DBMS_OUTPUT.PUT_LINE('Subtraction: ' || subtraction);
+    DBMS_OUTPUT.PUT_LINE('Multiplication: ' || multiplication);
+    DBMS_OUTPUT.PUT_LINE('Division: ' || division);
+END;
+/
+
+----
+
+--All Arithmatic operations in single Query--
+--Run Time Method --
+
+DECLARE
+    a NUMBER := &a;
+    b NUMBER := &b;
+    
+    addition NUMBER;
+    subtraction NUMBER;
+    multiplication NUMBER;
+    division NUMBER;
+BEGIN
+    addition := a + b;
+    subtraction := a - b;
+    multiplication := a * b;
+    division := a / b;
+
+    DBMS_OUTPUT.PUT_LINE('This is Addition of a and b : ' || addition);
+    DBMS_OUTPUT.PUT_LINE('This is Subtraction a and b: ' || subtraction);
+    DBMS_OUTPUT.PUT_LINE('This is Multiplication a and b: ' || multiplication);
+    DBMS_OUTPUT.PUT_LINE('This is Division a and b : ' || division);
+END;
+/
+
+
+--Multiple variable (+,-,*,/)
+
+DECLARE
+
+a number;
+b number;
+
+add number;
+sub number;
+multiple number;
+divide number;
+
+total number;
+BEGIN
+
+add := &a+&b;
+sub := &a-&b;
+multiple := &a*&b;
+divide := &a/&b;
+
+total :=&a+&b-&a*&b/&a;
+
+DBMS_OUTPUT.PUT_LINE(add);
+DBMS_OUTPUT.PUT_LINE(sub);
+DBMS_OUTPUT.PUT_LINE(multiple);
+DBMS_OUTPUT.PUT_LINE(divide);
+
+DBMS_OUTPUT.PUT_LINE(total);
+
+end;
+/
+
+
+--If elese statements--
+declare 
+
+name varchar2(15);
+marks number;
+
+BEGIN
+
+name:='&a';
+marks:=&b;
+
+if marks > 50 then
+dbms_output.put_line(name||' Scored : '||marks);
+else
+dbms_output.put_line('Go and study well');
+end if;
+end;
+/
+
+declare 
+
+stu_name varchar2(15);
+marks number;
+
+BEGIN
+
+stu_name:='&a';
+marks:=&b;
+
+if marks > 50 then
+dbms_output.put_line(stu_name||' Scored : '||marks);
+else
+dbms_output.put_line(stu_name||' '||'Go and study well dont waste parents money.');
+end if;
+end;
+/
