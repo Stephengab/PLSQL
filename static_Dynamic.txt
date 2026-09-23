@@ -1,0 +1,275 @@
+--23.09.2026 Named Block--
+
+--Procedure
+
+--Static Procedure
+
+create or replace procedure sal_proc
+as
+sal number;
+begin
+select salary into sal from employees where employee_id=100; 
+dbms_output.put_line('The salary is:'||sal);
+end;
+/
+
+exec sal_proc;
+
+exec add_proc;
+
+--Dynamic Procedure
+
+create or replace procedure sal_proc1(emp_id in number)
+as
+f_name varchar2(20);
+sal number(10);
+did number(5);
+begin
+select first_name,salary,department_id into f_name,sal,did from employees where employee_id=emp_id;
+dbms_output.put_line('The first_name is:'||f_name);
+dbms_output.put_line('The Salary is:'||sal);
+dbms_output.put_line('The department id is:'||did);
+end;
+/
+
+exec sal_proc1(120);
+
+--In,Out Parameter
+
+create or replace procedure sal_proc2
+(emp_id in number,sal out number)
+as
+begin
+select salary into sal from employees where employee_id=emp_id;
+
+end;
+/
+exec sal_proc2(100,sal);
+declare
+sal number;
+begin
+sal_proc2(100,sal);
+dbms_output.put_line('The Salary is:'||sal);
+end;
+/
+
+
+--static procedure example addition--
+set serveroutput on;
+
+CREATE OR REPLACE PROCEDURE addition
+IS
+    a NUMBER := &a;
+    b NUMBER := &b;
+    addition NUMBER;
+BEGIN
+    addition := a + b;
+
+    DBMS_OUTPUT.PUT_LINE('Addition of a and b: ' || addition);
+END;
+/
+
+exec addition;
+
+
+-- for all arithmatic operation --
+CREATE OR REPLACE PROCEDURE calculations
+IS
+    a NUMBER := &a;
+    b NUMBER := &b;
+    addition NUMBER;
+    subtraction NUMBER;
+    multiplication NUMBER;
+    division NUMBER;
+BEGIN
+    addition := a + b;
+    subtraction := a - b;
+    multiplication := a * b;
+    division := a / b;
+
+    DBMS_OUTPUT.PUT_LINE('The output of Addition is : ' || addition);
+    DBMS_OUTPUT.PUT_LINE('The Result of Subtraction is : ' || subtraction);
+    DBMS_OUTPUT.PUT_LINE('The result of Multiplication is : ' || multiplication);
+    DBMS_OUTPUT.PUT_LINE('The Result of Division is : ' || division);
+END;
+/
+
+  EXECUTE  calculations;
+
+--dynamic procedure in parameter subtraction--
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE Subtraction
+(
+    a IN NUMBER,
+    b IN NUMBER
+)
+IS
+    Subtraction number;
+BEGIN
+    Subtraction := a - b;
+
+    DBMS_OUTPUT.PUT_LINE('The Output of Subtraction of a and b: ' || Subtraction);
+END;
+/
+
+execute Subtraction (&a,&b);run time method
+execute Subtraction (100,20);  variable initialise method
+
+set serveroutpu on;
+
+CREATE OR REPLACE PROCEDURE subtraction
+(
+    a IN NUMBER,
+    b IN NUMBER
+)
+IS
+    result NUMBER;
+BEGIN
+    result := a - b;
+
+    DBMS_OUTPUT.PUT_LINE('Salary after subtraction: ' || result);
+END;
+/
+
+DECLARE
+    salary_value NUMBER;
+    subtract_value NUMBER := 500;
+BEGIN
+    SELECT salary
+    INTO salary_value
+    FROM employees
+    WHERE department_id = 100;
+
+    subtraction(salary_value, subtract_value);
+END;
+/
+
+execute  subtraction (&a,&b);
+
+
+
+
+
+
+
+
+
+
+dynamic procedure in out parameter multiplication
+
+create or replace procedure ex1_proc(emp_id in number)
+as
+f_name varchar2(20);
+sal number(10);
+did number(5);
+begin
+select first_name,salary,department_id into f_name,sal,did from employees where employee_id=emp_id;
+dbms_output.put_line('The first_name is:'||f_name);
+dbms_output.put_line('The Salary is:'||sal);
+dbms_output.put_line('The department id is:'||did);
+end;
+/
+
+--static procedure example addition--
+set serveroutput on;
+CREATE OR REPLACE PROCEDURE addition(a IN NUMBER, b IN NUMBER)
+AS
+    no1 NUMBER;
+    no2 NUMBER;
+    addition NUMBER;
+BEGIN
+    Select a, b
+    into no1, no2
+    from dual;
+
+    addition := no1 + no2;
+
+    DBMS_OUTPUT.PUT_LINE('The addition of no1 and no 2 is: ' || addition);
+END;
+/
+
+execute addition (&no1,&no2);
+
+create or replace procedure emp_proc(emp_id in number)
+as
+
+f_name varchar2(15);
+sal number;
+dept_id number;
+
+begin
+
+select FIRST_NAME, salary, department_id into f_name, sal, dept_id 
+from EMPLOYEES where employee_id = emp_id;
+
+if (dept_id = 100) then
+sal := sal-5000;
+dbms_output.put_line(sal);
+else
+dbms_output.put_line('The id does not match');
+end if;
+
+dbms_output.put_line(emp_id);
+dbms_output.put_line(f_name);
+dbms_output.put_line(sal);
+dbms_output.put_line(dept_id);
+
+end;
+/
+sub
+create or replace procedure emp_proc(emp_id in number)
+as
+
+f_name varchar2(15);
+sal number;
+dept_id number;
+
+begin
+
+select FIRST_NAME, salary, department_id into f_name, sal, dept_id 
+from EMPLOYEES where employee_id = emp_id;
+
+if (dept_id = 100) then
+sal := sal-5000;
+dbms_output.put_line(sal);
+else
+dbms_output.put_line('The id does not match');
+end if;
+
+dbms_output.put_line(emp_id);
+dbms_output.put_line(f_name);
+dbms_output.put_line(sal);
+dbms_output.put_line(dept_id);
+
+end;
+/
+EXECUTE emp_proc(100);
+
+
+create or replace procedure emp_multiplication(emp_id in number)
+as
+
+f_name varchar2(15);
+sal number;
+dept_id number;
+
+begin
+
+select FIRST_NAME, salary, department_id into f_name, sal, dept_id 
+from EMPLOYEES where employee_id = emp_id;
+
+if (dept_id = 100) then
+sal := sal*5000;
+dbms_output.put_line(sal);
+else
+dbms_output.put_line('The id does not match');
+end if;
+
+dbms_output.put_line(emp_id);
+dbms_output.put_line(f_name);
+dbms_output.put_line(sal);
+dbms_output.put_line(dept_id);
+
+end;
+/
+execute emp_multiplication(110);
